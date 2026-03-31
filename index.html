@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Heru Rusdianto">
+    <title>JSON to SQL - Convert JSON to SQL INSERT Statements</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://github.com/herusdianto/json-sql" class="github-link" target="_blank" rel="noopener noreferrer" title="GitHub Repository">
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" fill="currentColor"/>
+            </svg>
+        </a>
+        <div class="theme-toggle">
+            <button id="theme-switch" aria-label="Toggle dark/light mode" class="theme-toggle-btn">
+                <span id="theme-icon"></span>
+            </button>
+        </div>
+    </div>
+
+    <header>
+        <h1>JSON to SQL Converter</h1>
+        <p>Convert JSON to SQL INSERT statements</p>
+        <p class="client-side-note"><strong>100% Client-side:</strong> All conversion is done in your browser. <u>No data is sent to any server.</u></p>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="input-section">
+                <!-- Load Example Button (moved to top) -->
+                <div class="example-btn-top-wrapper">
+                    <button class="example-btn" id="example-btn">Load Example</button>
+                </div>
+
+                <h2>JSON Input</h2>
+
+                <!-- Table Name Input -->
+                <div class="class-name-section">
+                    <label for="table-name">Table Name</label>
+                    <input type="text" id="table-name" placeholder="users" value="users">
+                </div>
+
+                <!-- JSON Input -->
+                <div class="json-input-section">
+                    <label for="json-input">Paste your JSON here</label>
+                    <textarea id="json-input" placeholder='[{"name": "John", "age": 30, "active": true}]'></textarea>
+                </div>
+
+                <!-- SQL Options -->
+                <div class="settings-section">
+                    <h3>SQL Options</h3>
+                    <div class="options-grid">
+                        <label class="option-item">
+                            <input type="checkbox" id="include-create" name="include-create">
+                            <span>Include CREATE TABLE</span>
+                        </label>
+                        <label class="option-item">
+                            <input type="checkbox" id="use-insert-ignore" name="use-insert-ignore">
+                            <span>INSERT IGNORE</span>
+                        </label>
+                        <label class="option-item">
+                            <input type="checkbox" id="use-on-duplicate" name="use-on-duplicate">
+                            <span>ON DUPLICATE KEY UPDATE</span>
+                        </label>
+                        <label class="option-item">
+                            <input type="checkbox" id="use-quotes" name="use-quotes" checked>
+                            <span>Quote Identifiers</span>
+                        </label>
+                        <label class="option-item">
+                            <input type="checkbox" id="use-batch" name="use-batch" checked>
+                            <span>Batch Insert</span>
+                        </label>
+                        <label class="option-item">
+                            <input type="checkbox" id="use-semicolon" name="use-semicolon" checked>
+                            <span>Add Semicolons</span>
+                        </label>
+                        <label class="option-item">
+                            <input type="checkbox" id="use-snake-case" name="use-snake-case">
+                            <span>Snake Case Column Names</span>
+                        </label>
+                    </div>
+
+                    <h3>Database Type</h3>
+                    <div class="options-grid">
+                        <label class="option-item">
+                            <input type="radio" id="db-mysql" name="db-type" value="mysql" checked>
+                            <span>MySQL</span>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" id="db-postgres" name="db-type" value="postgres">
+                            <span>PostgreSQL</span>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" id="db-sqlite" name="db-type" value="sqlite">
+                            <span>SQLite</span>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" id="db-mssql" name="db-type" value="mssql">
+                            <span>SQL Server</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="convert-actions">
+                    <button class="clear-btn" id="clear-btn">Clear</button>
+                    <button class="format-btn" id="format-btn">Format JSON</button>
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2>Generated SQL</h2>
+
+                <!-- Stats -->
+                <div id="stats" class="stats-bar hidden">
+                    <div class="stat-item">
+                        <span class="stat-label">Tables:</span>
+                        <span id="table-count" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Rows:</span>
+                        <span id="row-count" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Statements:</span>
+                        <span id="statement-count" class="stat-value">0</span>
+                    </div>
+                </div>
+
+                <!-- Container for generated SQL -->
+                <div id="sql-container">
+                    <div class="empty-state">
+                        <p>SQL statements will appear here...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Messages -->
+        <div id="status" class="status hidden"></div>
+    </div>
+
+    <footer>
+        <p>Created by <a href="https://herusdianto.github.io/" target="_blank" rel="noopener noreferrer">Heru Rusdianto</a> with AI Assistance</p>
+        <p class="copyright">
+            © <span id="currentYear"></span> All rights reserved
+        </p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

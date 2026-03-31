@@ -160,7 +160,3 @@ Contributions are welcome! Feel free to submit a Pull Request.
 ## Demo
 
 [https://herusdianto.github.io/json-sql/](https://herusdianto.github.io/json-sql/)
-
-## Created by
-
-[Heru Rusdianto](https://herusdianto.github.io/) with AI Assistance

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Heru Rusdianto">
-    <title>JSON to SQL - Convert JSON to SQL INSERT Statements</title>
+    <title>JSON ⇄ SQL Converter</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
@@ -23,12 +23,20 @@
     </div>
 
     <header>
-        <h1>JSON to SQL Converter</h1>
-        <p>Convert JSON to SQL INSERT statements</p>
+        <h1>JSON ⇄ SQL Converter</h1>
+        <p>Convert JSON to SQL and vice versa</p>
         <p class="client-side-note"><strong>100% Client-side:</strong> All conversion is done in your browser. <u>No data is sent to any server.</u></p>
+        
+        <!-- Mode Toggle -->
+        <div class="mode-toggle">
+            <button id="mode-json-to-sql" class="mode-btn active">JSON to SQL</button>
+            <button id="mode-sql-to-json" class="mode-btn">SQL to JSON</button>
+        </div>
     </header>
 
     <div class="container">
+        <!-- JSON to SQL Section -->
+        <div id="json-to-sql-section" class="converter-section">
         <div class="main-content">
             <div class="input-section">
                 <!-- Load Example Button (moved to top) -->
@@ -134,6 +142,50 @@
                 <div id="sql-container">
                     <div class="empty-state">
                         <p>SQL statements will appear here...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- SQL to JSON Section -->
+        <div id="sql-to-json-section" class="converter-section hidden">
+            <div class="main-content">
+                <div class="input-section">
+                    <h2>SQL Input</h2>
+                    
+                    <!-- SQL Input -->
+                    <div class="sql-input-section">
+                        <label for="sql-input">Paste your SQL INSERT statements here</label>
+                        <textarea id="sql-input" placeholder='INSERT INTO users (id, firstName, lastName, email, age, active, salary, createdAt) VALUES (1, "John", "Doe", "john.doe@example.com", 30, TRUE, 75000.50, "2024-01-15T10:30:00Z");'></textarea>
+                    </div>
+
+                    <div class="convert-actions">
+                        <button class="clear-sql-btn" id="clear-sql-btn">Clear</button>
+                        <button class="format-sql-btn" id="format-sql-btn">Format SQL</button>
+                    </div>
+                </div>
+
+                <div class="output-section">
+                    <h2>Generated JSON</h2>
+
+                    <!-- Stats -->
+                    <div id="json-stats" class="stats-bar hidden">
+                        <div class="stat-item">
+                            <span class="stat-label">Tables:</span>
+                            <span id="json-table-count" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Rows:</span>
+                            <span id="json-row-count" class="stat-value">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Container for generated JSON -->
+                    <div id="json-container">
+                        <div class="empty-state">
+                            <p>JSON output will appear here...</p>
+                        </div>
                     </div>
                 </div>
             </div>

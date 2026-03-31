@@ -241,9 +241,8 @@ header p {
 }
 
 .json-input-section textarea {
-    min-height: 150px;
+    min-height: 300px;
     flex: 1;
-    min-height: 0;
 }
 
 /* Settings Section */
@@ -798,4 +797,254 @@ footer .copyright {
     #output-text {
         min-height: 300px;
     }
+}
+
+/* Mode Toggle */
+.mode-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.mode-btn {
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: 2px solid #e5e7eb;
+    background: #fff;
+    color: #181818;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mode-btn:hover {
+    border-color: var(--primary-color);
+    background: #e0e7ff;
+}
+
+.mode-btn.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.dark-mode .mode-btn {
+    background: #23272b;
+    border-color: #2d3237;
+    color: #e5e7eb;
+}
+
+.dark-mode .mode-btn:hover {
+    background: #333a41;
+    border-color: var(--primary-color);
+}
+
+.dark-mode .mode-btn.active {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    border-color: var(--primary-color);
+    color: white;
+}
+
+/* Converter Section */
+.converter-section {
+    width: 100%;
+}
+
+/* SQL Input Section */
+.sql-input-section {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.sql-input-section label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+.dark-mode .sql-input-section label {
+    color: #d1d5db;
+}
+
+.sql-input-section textarea {
+    min-height: 300px;
+    flex: 1;
+}
+
+/* JSON Box */
+#json-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+    min-height: 0;
+}
+
+.json-box {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.dark-mode .json-box {
+    background: #181c1f;
+    border-color: #2d3237;
+}
+
+.json-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: #f3f4f6;
+    border-bottom: 1px solid #e5e7eb;
+    flex-shrink: 0;
+}
+
+.dark-mode .json-box-header {
+    background: #23272b;
+    border-bottom-color: #2d3237;
+}
+
+.json-box-header .json-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--primary-color);
+}
+
+.dark-mode .json-box-header .json-name {
+    color: #a5b4fc;
+}
+
+.json-box-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.json-box-actions .copy-btn,
+.json-box-actions .download-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    color: #181818;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.json-box-actions .copy-btn:hover {
+    border-color: var(--primary-color);
+    background: #e0e7ff;
+    color: var(--primary-color);
+}
+
+.json-box-actions .download-btn:hover {
+    border-color: var(--secondary-color);
+    background: #d1fae5;
+    color: var(--secondary-color);
+}
+
+.dark-mode .json-box-actions .copy-btn,
+.dark-mode .json-box-actions .download-btn {
+    background: #2d3237;
+    border-color: #3d4247;
+    color: #e5e7eb;
+}
+
+.dark-mode .json-box-actions .copy-btn:hover {
+    background: #333a41;
+    border-color: var(--primary-color);
+    color: #a5b4fc;
+}
+
+.dark-mode .json-box-actions .download-btn:hover {
+    background: #333a41;
+    border-color: var(--secondary-color);
+    color: #6ee7b7;
+}
+
+.json-code {
+    margin: 0;
+    padding: 15px;
+    background: #fafafa;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    height: 100%;
+    min-height: 600px;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: none;
+    resize: vertical;
+    color: #181818;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    flex: 1;
+}
+
+.dark-mode .json-code {
+    background: #0f1215;
+}
+
+/* Clear SQL and Format SQL Buttons */
+.clear-sql-btn,
+.format-sql-btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 2px solid #e5e7eb;
+    background: #f3f4f6;
+    color: #181818;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clear-sql-btn:hover {
+    border-color: var(--error-color);
+    background: #fee2e2;
+    color: var(--error-color);
+}
+
+.format-sql-btn:hover {
+    border-color: var(--secondary-color);
+    background: #d1fae5;
+    color: var(--secondary-color);
+}
+
+.dark-mode .clear-sql-btn,
+.dark-mode .format-sql-btn {
+    background: #23272b;
+    border-color: #2d3237;
+    color: #e5e7eb;
+}
+
+.dark-mode .clear-sql-btn:hover {
+    background: #333a41;
+    border-color: var(--error-color);
+    color: #fca5a5;
+}
+
+.dark-mode .format-sql-btn:hover {
+    background: #333a41;
+    border-color: var(--secondary-color);
+    color: #6ee7b7;
 }
